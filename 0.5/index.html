@@ -1,0 +1,162 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+            }
+        </style>
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-OiWEn8WwtH+084y4yW2YhhH6z/qTSecHZuk/eiWtnvLtU+Z8lpDsmhOKkex6YARr" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        
+        <!--  mapbox api  -->
+        <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+        <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+        
+        <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+        <script src='//api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js'></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">HASS Asset Capture Tool</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <p class="navbar-form navbar-right" role="form">
+            
+          </p>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+        
+        <!--   Centre parts     -->
+        <style>
+            .parts > div{    
+                width: 100%;
+                padding-top: 20px;
+                margin: auto;
+            }
+            .part2.form input, .part2.form select {
+              outline: none;
+              -webkit-box-shadow: none !important;
+              -moz-box-shadow: none !important;
+              box-shadow: none !important;
+            }
+            
+        body {
+            margin: 0;
+        }
+        html, body, .parts, #map {
+            height: 100%;
+            width: 100%;
+        }
+            
+        </style>
+    
+    
+    <div class="parts">
+        <div class="part1 map" id="map"></div>
+        
+        <div class="part2 form" style="display: none">
+            <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+            <div class="bootstrap-iso">
+             <div class="container-fluid">
+              <div class="row">
+               <div class="col-md-6 col-md-6">
+                <form method="post">
+                 <div class="form-group ">
+                  <label class="control-label " for="asset-loc">
+                   Asset Location
+                  </label>
+                  <input class="form-control" id="asset-loc" name="asset-loc" type="text"/>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label " for="asset-name">
+                   Asset Name
+                  </label>
+                  <input class="form-control" id="asset-name" name="asset-name" type="text"/>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label " for="asset-number">
+                   Asset Number
+                  </label>
+                  <input class="form-control" id="asset-number" name="asset-number" type="text"/>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label " for="block-name">
+                   Block Name
+                  </label>
+                  <input class="form-control" id="block-name" name="block-name" type="text"/>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label " for="estate-name">
+                   Estate Name
+                  </label>
+                  <input class="form-control" id="estate-name" name="estate-name" type="text"/>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label " for="housing-area">
+                   Housing Area
+                  </label>
+                  <select class="select form-control" id="housing-area" name="housing-area">
+                   <option value="Holland Walk">
+                    Holland Walk
+                   </option>
+                   <option value="St John St">
+                    St John St
+                   </option>
+                   <option value="Upper Street">
+                    Upper Street
+                   </option>
+                  </select>
+                 </div>
+                 <div class="form-group">
+                  <div>
+                   <button class="btn btn-secondary" name="back" type="button" id="back">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Back
+                   </button>
+                   <button class="btn btn-default " name="submit" type="button" id="submit">
+                    Submit
+                   </button>
+                  </div>
+                 </div>
+                </form>
+               </div>
+              </div>
+             </div>
+            </div>
+        </div>
+    </div>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"><\/script>')</script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        
+        <script src="js/main.js"></script>
+
+    </body>
+</html>
