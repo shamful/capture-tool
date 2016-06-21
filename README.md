@@ -1,4 +1,4 @@
-BI_Mods
+capture-tool
 =======
 
-Chrome TM scripts made for BI EPMS
+ (public-test)
